@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "pro-game"
+version = "0.1.0"
+description = ""
+authors = ["Bohdan <bohdan@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1.4"
+python-decouple = "^3.8"
+psycopg2-binary = "^2.9.10"
+djangorestframework = "^3.15.2"
+djangorestframework-simplejwt = {extras = ["django"], version = "^5.4.0"}
+django-filter = "^24.3"
+redis = "^5.2.1"
+pytest = "^8.3.4"
+pytest-django = "^4.9.0"
+pytest-factoryboy = "^2.7.0"
+channels = "^4.2.0"
+daphne = "^4.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
