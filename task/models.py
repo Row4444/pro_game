@@ -18,17 +18,19 @@ class PriorityEnum(ChoicesEnum):
 
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)  # Do not use in filters, but in general, index needed
     description = models.TextField(null=True, blank=True)
     status = models.CharField(
         max_length=20,
         choices=StatusEnum.choices(),
         default=StatusEnum.NEW.value,
+        db_index=True,  # use in filters
     )
     priority = models.CharField(
         max_length=20,
         choices=PriorityEnum.choices(),
         default=PriorityEnum.MEDIUM.value,
+        db_index=True,  # use in filters
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

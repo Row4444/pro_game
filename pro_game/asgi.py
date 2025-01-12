@@ -3,7 +3,6 @@ import os
 from decouple import config
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.auth import AuthMiddlewareStack
 import pro_game.routing
 from pro_game.middleware import TokenAuthMiddleware
 

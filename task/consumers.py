@@ -22,6 +22,7 @@ class TaskStatusConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def task_exists(self):
+        """ check user has accept for this task """
         return self.user.task_set.filter(id=self.task_id).exists()
 
     async def disconnect(self, close_code):
