@@ -6,11 +6,15 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class TaskStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.user = self.scope["user"]  # from middleware pro_game.middleware.TokenAuthMiddleware
+        self.user = self.scope[
+            "user"
+        ]  # from middleware pro_game.middleware.TokenAuthMiddleware
         self.task_id = self.scope["url_route"]["kwargs"]["task_id"]
         self.group_name = f"task_{self.task_id}"
 
-        if self.user.is_anonymous or not self.task_exists():  # verify if user have access for the task
+        if (
+            self.user.is_anonymous or not self.task_exists()
+        ):  # verify if user have access for the task
             await self.close()
         else:
             await self.channel_layer.group_add(self.group_name, self.channel_name)
@@ -31,6 +35,8 @@ class TaskStatusConsumer(AsyncWebsocketConsumer):
             self.group_name, {"type": "task_status_update", "status": status}
         )
 
-    async def task_status_update(self, event):  # use in task.signals.send_task_status_update
+    async def task_status_update(
+        self, event
+    ):  # use in task.signals.send_task_status_update
         status = event["status"]
         await self.send(text_data=json.dumps({"status": status}))

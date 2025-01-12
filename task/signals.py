@@ -7,7 +7,9 @@ from .models import Task
 
 
 @receiver(post_save, sender=Task)
-def send_task_status_update(sender, instance, **kwargs):  # for send message with websocket
+def send_task_status_update(
+    sender, instance, **kwargs
+):  # for send message with websocket
     channel_layer = get_channel_layer()
     group_name = f"task_{instance.id}"
 
