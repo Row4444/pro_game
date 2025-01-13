@@ -24,13 +24,13 @@ class Task(models.Model):
         max_length=20,
         choices=StatusEnum.choices(),
         default=StatusEnum.NEW.value,
-        db_index=True,  # use in filters
+        db_index=True,  # bad practice for choices, but use in filters
     )
     priority = models.CharField(
         max_length=20,
         choices=PriorityEnum.choices(),
         default=PriorityEnum.MEDIUM.value,
-        db_index=True,  # use in filters
+        db_index=True,  # bad practice for choices, but use in filters
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
